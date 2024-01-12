@@ -1,11 +1,28 @@
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
-const screenshot = require('../scripts/screenshot');
+const path = require('path');
+const puppeteer = require('puppeteer');
 expect.extend({ toMatchImageSnapshot });
 
 describe('Visual Regression Test', () => {
-  it('should page be visually equal', async () => {
-    const image = await screenshot();
+  let browser;
+  const jestImageSnapshot = path.join(__dirname, '..', '..', 'images');
 
-    expect(image).toMatchImageSnapshot();
+  beforeAll(async () => {
+    browser = await puppeteer.launch({ headless: 'new' });
+  });
+
+  it('should fail if there is more than 1% difference', async () => {
+    const page = await browser.newPage();
+    await page.goto('http://localhost:3000');
+
+    const image = await page.screenshot();
+
+    expect(image).toMatchImageSnapshot({
+      customSnapshotsDir: jestImageSnapshot,
+    });
+  });
+
+  afterAll(async () => {
+    await browser.close();
   });
 });
