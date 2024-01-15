@@ -13,7 +13,7 @@ function getConfig() {
 
 describe('Visual Regression Test', () => {
   it('should pass if there is less than 1% difference', async () => {
-    await page.goto(process.env.URL || 'http://localhost:3000');
+    await page.goto('https://screenshot-pipeline.vercel.app/');
 
     const image = await page.screenshot();
 
