@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
+require('dotenv').config();
 
-async function screenshot() {
+async function screenshot(url) {
   let browser;
 
   try {
@@ -8,7 +9,7 @@ async function screenshot() {
       headless: 'new',
     });
     const page = await browser.newPage();
-    await page.goto('http://localhost:3000');
+    await page.goto(url);
     const image = await page.screenshot({
       path: './images/screenshot.png',
       fullPage: true,
@@ -23,7 +24,7 @@ async function screenshot() {
 }
 
 if (require.main === module) {
-  screenshot();
+  screenshot(process.env.HOST);
 }
 
 module.exports = screenshot;

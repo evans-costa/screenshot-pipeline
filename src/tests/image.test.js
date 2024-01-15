@@ -1,4 +1,5 @@
 const path = require('path');
+require('dotenv').config();
 
 function getConfig() {
   const jestImageSnapshot = path.join(__dirname, '..', '..', 'images');
@@ -12,7 +13,7 @@ function getConfig() {
 
 describe('Visual Regression Test', () => {
   it('should pass if there is less than 1% difference', async () => {
-    await page.goto('http://localhost:3000');
+    await page.goto(process.env.HOST || 'http://localhost:3000');
 
     const image = await page.screenshot();
 
