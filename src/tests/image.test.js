@@ -1,28 +1,22 @@
-const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const path = require('path');
-const puppeteer = require('puppeteer');
-expect.extend({ toMatchImageSnapshot });
 
-describe('Visual Regression Test', () => {
-  let browser;
+function getConfig() {
   const jestImageSnapshot = path.join(__dirname, '..', '..', 'images');
 
-  beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: 'new' });
-  });
+  return {
+    diffDirection: 'vertical',
+    customSnapshotsDir: jestImageSnapshot,
+    updatePassedSnapshot: true,
+  };
+}
 
-  it('should fail if there is more than 1% difference', async () => {
-    const page = await browser.newPage();
+describe('Visual Regression Test', () => {
+  it('should pass if there is less than 1% difference', async () => {
     await page.goto('http://localhost:3000');
 
     const image = await page.screenshot();
 
-    expect(image).toMatchImageSnapshot({
-      customSnapshotsDir: jestImageSnapshot,
-    });
-  });
-
-  afterAll(async () => {
-    await browser.close();
+    const config = getConfig();
+    expect(image).toMatchImageSnapshot(config);
   });
 });
