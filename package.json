@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "screen": "node ./src/scripts/screenshot.js",
-    "test": "JEST_PUPPETEER_CONFIG=./src/tests/jest-puppeteer.config.js jest --config=./src/tests/jest.config.js",
+    "test": "JEST_PUPPETEER_CONFIG=./src/tests/jest-puppeteer.config.js jest --config=./src/tests/jest.config.js --runInBand",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
