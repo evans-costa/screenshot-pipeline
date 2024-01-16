@@ -3,11 +3,12 @@ name: screenshot-action
 run-name: Screenshot with visual regression test
 
 on:
-  deployment_status:
+  push:
+    branches:
+      - main
 
 jobs:
   test-screenshot:
-    if: ${{ github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -40,8 +41,6 @@ jobs:
 
       - name: Run Tests
         run: npm run test
-        env:
-          BASE_URL: ${{ github.event.deployment_status.environment_url }}
 
       - name: Archive visual regression failures
         uses: actions/upload-artifact@v4
