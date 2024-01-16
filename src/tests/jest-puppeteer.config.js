@@ -2,8 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   server: {
-    command: `npm run dev`,
-    port: 3000,
+    command: `npm run start`,
     launchTimeout: 30000,
     debug: true,
   },
