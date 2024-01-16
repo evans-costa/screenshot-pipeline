@@ -16,7 +16,7 @@ function getConfig() {
 
 describe('Visual Regression Test', () => {
   it('should pass if there is less than 1% difference', async () => {
-    await page.goto(process.env.BASE_URL);
+    await page.goto(baseURL);
 
     const image = await page.screenshot();
 
