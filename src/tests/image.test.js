@@ -7,6 +7,7 @@ function getConfig() {
   return {
     diffDirection: 'vertical',
     customSnapshotsDir: jestImageSnapshot,
+    customSnapshotIdentifier: 'visual-regression-diff',
     updatePassedSnapshot: true,
     failureThreshold: 0.01,
     failureThresholdType: 'percent',
