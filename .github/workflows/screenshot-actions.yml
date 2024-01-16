@@ -4,8 +4,6 @@ run-name: Screenshot with visual regression test
 
 on:
   deployment_status:
-    branches:
-      - main
 
 jobs:
   test-screenshot:
