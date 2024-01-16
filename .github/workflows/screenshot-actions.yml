@@ -59,4 +59,4 @@ jobs:
         if: success()
         with:
           name: screenshot
-          path: ${{ github.workspace }}/*.png
+          path: ${{ github.workspace }}/images/*.png
