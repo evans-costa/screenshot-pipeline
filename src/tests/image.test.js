@@ -18,7 +18,7 @@ describe('Visual Regression Test', () => {
   it('should pass if there is less than 1% difference', async () => {
     await page.goto(baseURL);
 
-    const image = await page.screenshot();
+    const image = await page.screenshot({ fullPage: true });
 
     const config = getConfig();
     expect(image).toMatchImageSnapshot(config);
