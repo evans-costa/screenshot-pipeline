@@ -36,6 +36,9 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Build
+        run: npm run build
+
       - name: Run Tests
         run: npm run test
 
@@ -48,6 +51,10 @@ jobs:
           retention-days: 10
 
       - name: Update snapshot
+        run: npm run test:update
+        if: success()
+
+      - name: Upload updated snapshot
         uses: actions/upload-artifact@v4
         if: success()
         with:
