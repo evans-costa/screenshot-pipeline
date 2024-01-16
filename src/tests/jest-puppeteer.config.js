@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
-  server: process.env.URL
+  server: process.env.BASE_URL
     ? undefined
     : {
         command: `npm run start`,
