@@ -46,3 +46,10 @@ jobs:
           name: visual-regression-diff
           path: images/__diff_output__/
           retention-days: 10
+
+      - name: Update snapshot
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: screenshot
+          path: ${{ github.workspace }}/*.png
