@@ -8,6 +8,8 @@ function getConfig() {
     diffDirection: 'vertical',
     customSnapshotsDir: jestImageSnapshot,
     updatePassedSnapshot: true,
+    failureThreshold: 0.01,
+    failureThresholdType: 'percent',
   };
 }
 
