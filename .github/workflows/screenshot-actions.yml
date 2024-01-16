@@ -3,6 +3,7 @@ name: screenshot-action
 run-name: Screenshot with visual regression test
 
 on:
+  deployment_status:
   push:
     branches:
       - main
@@ -41,3 +42,13 @@ jobs:
 
       - name: Run Tests
         run: npm run test
+        env:
+          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+
+      - name: Archive visual regression failures
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-regression-diff
+          path: home/runner/work/screenshot-pipeline/screenshot-pipeline/images/__diff_output__
+          retention-days: 10
