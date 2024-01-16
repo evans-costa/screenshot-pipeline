@@ -47,5 +47,5 @@ jobs:
         if: failure()
         with:
           name: visual-regression-diff
-          path: home/runner/work/screenshot-pipeline/screenshot-pipeline/images/__diff_output__
+          path: images/__diff_output__/
           retention-days: 10
