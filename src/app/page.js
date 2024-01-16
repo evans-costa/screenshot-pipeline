@@ -25,22 +25,6 @@ export default function Home() {
             />
           </a>
         </div>
-        <div>
-          <p>
-            HELLO WORLD!&nbsp;
-            <code className={styles.code}>hello.world.js</code>
-          </p>
-        </div>
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src='/next.svg'
-            alt='Next.js Logo'
-            width={180}
-            height={37}
-            priority
-          />
-        </div>
       </div>
     </main>
   );
