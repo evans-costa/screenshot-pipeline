@@ -18,7 +18,7 @@ function getConfig() {
 
 describe('Visual Regression Test', () => {
   it('should pass if there is less than 1% difference', async () => {
-    await page.goto('https://screenshot-pipeline-6c43xgl8w-evans-costa.vercel.app');
+    await page.goto(baseURL);
 
     const image = await page.screenshot({ fullPage: true });
 
