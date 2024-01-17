@@ -13,6 +13,7 @@ jobs:
     environment: github-pages
     permissions:
       contents: write
+      actions: write
     strategy:
       matrix:
         node-version: ['18.x']
