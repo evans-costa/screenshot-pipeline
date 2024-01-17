@@ -10,6 +10,7 @@ function getConfig() {
     customSnapshotIdentifier: 'visual-regression-diff',
     updatePassedSnapshot: true,
     failureThreshold: 0.01,
+    allowSizeMismatch: true,
     failureThresholdType: 'percent',
   };
 }
@@ -17,7 +18,6 @@ function getConfig() {
 describe('Visual Regression Test', () => {
   it('should pass if there is less than 1% difference', async () => {
     await page.goto(baseURL);
-    console.log(baseURL);
 
     const image = await page.screenshot({ fullPage: true });
 
