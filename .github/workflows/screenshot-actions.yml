@@ -39,10 +39,9 @@ jobs:
           https://api.github.com/repositories/${{ github.repository_id }}/environments/github-pages/variables/WEBSITE_URL \
           -d '{"name":"WEBSITE_URL","value":"https://${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }}"}'
 
-      - name: Update .env file
+      - name: Create .env file
         run: |
-          touch .env
-          echo "WEBSITE_URL=${{ vars.WEBSITE_URL }}" > .env
+          echo WEBSITE_URL=${{ vars.WEBSITE_URL }} >> $GITHUB_ENV
 
       - uses: actions/checkout@v4
 
@@ -67,6 +66,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          WEBSITE_URL: ${{ env.WEBSITE_URL }}
 
       - name: Run Tests
         run: npm run test
