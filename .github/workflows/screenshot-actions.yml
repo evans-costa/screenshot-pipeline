@@ -22,11 +22,11 @@ jobs:
         env:
           VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
         with:
-          deployment-url: screenshot-pipeline-oqfd899x5-evans-costa.vercel.app
+          deployment-url: screenshot-pipeline.vercel.app
           timeout: 10
           poll-interval: 1
 
-      - name: Displays the deployment name (example on how to read information about the deployment)
+      - name: Displays the deployment name
         run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'
 
       - uses: actions/checkout@v4
