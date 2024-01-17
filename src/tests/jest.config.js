@@ -1,7 +1,9 @@
+require('dotenv').config();
+
 module.exports = {
   preset: 'jest-puppeteer',
   globals: {
-    baseURL: 'https://screenshot-pipeline.vercel.app/',
+    baseURL: process.env.WEBSITE_URL ?? 'http://localhost:3000',
   },
   testMatch: ['**/tests/*.test.js'],
   setupFilesAfterEnv: ['./jest.image.js'],
