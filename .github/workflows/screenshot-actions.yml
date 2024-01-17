@@ -29,6 +29,19 @@ jobs:
       - name: Displays the deployment name
         run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'
 
+      - name: Get variable environment
+        run: |
+          curl -L \
+          -X PATCH \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repositories/${{ github.repository_id }}/environments/github-pages/variables/${{ vars.WEBSITE_URL }} \
+          -d '{"name":"WEBSITE_URL","value":${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }}}'
+
+      - name: Update .env file
+        run: echo "${{ vars.WEBSITE_URL }}" > .env
+
       - uses: actions/checkout@v4
 
       - name: CI Building Caching
@@ -55,8 +68,6 @@ jobs:
 
       - name: Run Tests
         run: npm run test
-        env:
-          WEBSITE_URL: ${{ (steps.await-vercel.outputs.deploymentDetails).url }}
 
       - name: Archive visual regression failures
         uses: actions/upload-artifact@v4
