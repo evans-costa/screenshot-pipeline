@@ -11,10 +11,7 @@ jobs:
   test-screenshot:
     runs-on: ubuntu-latest
     environment: github-pages
-    permissions:
-      actions: write
-      contents: write
-      repository-projects: write
+    permissions: write-all
     strategy:
       matrix:
         node-version: ['18.x']
