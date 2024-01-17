@@ -19,10 +19,11 @@
 
 ## Key Features
 
-* Everytime you make a push on your repo, the GitHub Action will run a pipeline CI workflow
-* This pipeline will make a screenshot of your deployed website 
+* Everytime you make a push on the repo, the GitHub Action will run a pipeline CI workflow
+* This pipeline will take a deploy preview made by Vercel
+* It will make a screenshot of this deployed preview website 
 * If not pass in the visual regression test, generates an artifact with the differences
-* If pass, the pipeline will commit the new snapshot and update the image in your repo README.md
+* If pass, the pipeline will commit the new snapshot and update the image in README.md
 
 ## Motivation
 
@@ -71,6 +72,12 @@ This software uses the following open source packages:
 - [Jest](https://jestjs.io/) powered by
 - [Jest Image Snapshot](https://github.com/americanexpress/jest-image-snapshot) with
 - [Jest-Puppeteer](https://github.com/argos-ci/jest-puppeteer) preset
+
+Some usefuls links and Actions I used in my GitHub Actions pipeline:
+- [Running Puppeteer on WSL2](https://log.rdl.ph/post/running-puppeteer-on-wsl2.html)
+- [Git Auto Commit Action](https://github.com/marketplace/actions/git-auto-commit)
+- [Upload Artifacts](https://github.com/actions/upload-artifact)
+- [Await for Vercel deployment Action](https://github.com/marketplace/actions/await-for-vercel-deployment#examples)
 
 ## License
 
