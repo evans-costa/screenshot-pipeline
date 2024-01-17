@@ -40,7 +40,9 @@ jobs:
           -d '{"name":"WEBSITE_URL","value":"https://${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }}"}'
 
       - name: Update .env file
-        run: echo "${{ vars.WEBSITE_URL }}" > .env
+        run: |
+          touch .env
+          echo "WEBSITE_URL=${{ vars.WEBSITE_URL }}" > .env
 
       - uses: actions/checkout@v4
 
