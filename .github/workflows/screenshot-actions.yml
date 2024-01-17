@@ -10,11 +10,25 @@ on:
 jobs:
   test-screenshot:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         node-version: ['18.x']
 
     steps:
+      - uses: UnlyEd/github-action-await-vercel@v1
+        id: await-vercel
+        env:
+          VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+        with:
+          deployment-url: screenshot-pipeline-oqfd899x5-evans-costa.vercel.app
+          timeout: 10
+          poll-interval: 1
+
+      - name: Displays the deployment name (example on how to read information about the deployment)
+        run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'
+
       - uses: actions/checkout@v4
 
       - name: CI Building Caching
@@ -40,7 +54,7 @@ jobs:
         run: npm run build
 
       - name: Run Tests
-        run: npm run test
+        run: WEBSITE_URL=${{ (steps.await-vercel.outputs.deploymentDetails).url }} npm run test
 
       - name: Archive visual regression failures
         uses: actions/upload-artifact@v4
@@ -54,9 +68,8 @@ jobs:
         run: npm run test:update
         if: success()
 
-      - name: Upload updated snapshot
-        uses: actions/upload-artifact@v4
+      - name: Commit snapshot
+        uses: stefanzweifel/git-auto-commit-action@v5
         if: success()
         with:
-          name: screenshot
-          path: ${{ github.workspace }}/images/*.png
+          commit_message: Update snapshot
