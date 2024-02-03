@@ -64,7 +64,7 @@ Once you commit your changes, the workflow, perfomed by GitHub Actions, will run
 
 ## Credits
 
-This software uses the following open source packages:
+This project uses the following open source packages:
 
 - [Node.js](https://nodejs.org/)
 - [GitHub Actions](https://docs.github.com/pt/actions)
@@ -73,7 +73,7 @@ This software uses the following open source packages:
 - [Jest Image Snapshot](https://github.com/americanexpress/jest-image-snapshot) with
 - [Jest-Puppeteer](https://github.com/argos-ci/jest-puppeteer) preset
 
-Some usefuls links and Actions I used in my GitHub Actions pipeline:
+Some useful links and Actions I used in my GitHub Actions pipeline:
 - [Running Puppeteer on WSL2](https://log.rdl.ph/post/running-puppeteer-on-wsl2.html)
 - [Git Auto Commit Action](https://github.com/marketplace/actions/git-auto-commit)
 - [Upload Artifacts](https://github.com/actions/upload-artifact)
